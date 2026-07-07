@@ -38,4 +38,28 @@ def parse_command(text):
     if "screenshot" in text:
         return ("screenshot", None, None)
 
+    if "voice mode on" in text:
+        return ("voice_on", None, None)
+
+    if "voice mode off" in text:
+        return ("voice_off", None, None)
+
+    # Common bare hotkeys people say naturally
+    COMMON_HOTKEYS = {
+        "alt tab": ["alt", "tab"],
+        "control tab": ["ctrl", "tab"],
+        "ctrl tab": ["ctrl", "tab"],
+        "control c": ["ctrl", "c"],
+        "ctrl c": ["ctrl", "c"],
+        "control v": ["ctrl", "v"],
+        "ctrl v": ["ctrl", "v"],
+        "control z": ["ctrl", "z"],
+        "ctrl z": ["ctrl", "z"],
+        "windows s": ["win", "s"],
+        "windows d": ["win", "d"],
+        "windows e": ["win", "e"],
+    }
+    if text in COMMON_HOTKEYS:
+        return ("hotkey", COMMON_HOTKEYS[text], None)
+
     return ("unknown", text, None)

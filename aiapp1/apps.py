@@ -20,6 +20,7 @@ KNOWN_APPS = {
     "task manager": "taskmgr",
     "control panel": "control",
     "file explorer": "explorer",
+    "telegram": "Telegram",
 }
 
 def open_app(name):

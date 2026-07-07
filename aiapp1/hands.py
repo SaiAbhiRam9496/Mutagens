@@ -36,7 +36,10 @@ def focus_window(title_substring):
         print(f"No window found matching '{title_substring}'")
         return False
     win = gw.getWindowsWithTitle(matches[0])[0]
-    win.activate()
+    try:
+        win.activate()
+    except Exception:
+        pass  # pygetwindow sometimes raises a false error even on success
     time.sleep(0.3)
     print(f"Switched to: {matches[0]}")
     return True
