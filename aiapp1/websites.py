@@ -2,6 +2,7 @@
 # Handles anything related to opening or searching websites
 
 import webbrowser
+from difflib import get_close_matches
 
 # Known sites and their base URLs
 KNOWN_SITES = {
@@ -30,12 +31,17 @@ KNOWN_SITES = {
 }
 
 def open_website(name):
-    """Opens a known site by name, or treats input as a raw URL."""
     name = name.strip().lower()
+    if name not in KNOWN_SITES and "." not in name:
+        matches = get_close_matches(name, KNOWN_SITES.keys(), n=1, cutoff=0.6)
+        if matches:
+            print(f"(Interpreting '{name}' as '{matches[0]}')")
+            name = matches[0]
+
     if name in KNOWN_SITES:
         url = KNOWN_SITES[name]
     else:
-        url = name  # assume it's already a domain like "example.com"
+        url = name
 
     if not url.startswith("http"):
         url = "https://" + url

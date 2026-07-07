@@ -2,6 +2,7 @@
 # Handles anything related to opening or closing desktop apps
 
 import os
+from difflib import get_close_matches
 
 # Known app names and their launch commands
 KNOWN_APPS = {
@@ -24,12 +25,16 @@ KNOWN_APPS = {
 }
 
 def open_app(name):
-    """Opens a known app by name."""
     name = name.strip().lower()
-    command = KNOWN_APPS.get(name, name)  # fallback: try the raw name
+    if name not in KNOWN_APPS:
+        matches = get_close_matches(name, KNOWN_APPS.keys(), n=1, cutoff=0.6)
+        if matches:
+            print(f"(Interpreting '{name}' as '{matches[0]}')")
+            name = matches[0]
+    command = KNOWN_APPS.get(name, name)
     os.system(f"start {command}")
     print(f"Opening {name}")
-
+    
 def close_app(name):
     """Closes an app by killing its process (best-effort)."""
     name = name.strip().lower()
