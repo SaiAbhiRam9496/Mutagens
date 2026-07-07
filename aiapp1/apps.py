@@ -9,6 +9,17 @@ KNOWN_APPS = {
     "calculator": "calc",
     "paint": "mspaint",
     "explorer": "explorer",
+    "word": "winword",
+    "excel": "excel",
+    "powerpoint": "powerpnt",
+    "vscode": "code",
+    "vs code": "code",
+    "cmd": "cmd",
+    "terminal": "wt",
+    "settings": "ms-settings:",
+    "task manager": "taskmgr",
+    "control panel": "control",
+    "file explorer": "explorer",
 }
 
 def open_app(name):

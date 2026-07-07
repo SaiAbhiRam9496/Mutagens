@@ -10,6 +10,23 @@ KNOWN_SITES = {
     "github": "github.com",
     "gmail": "mail.google.com",
     "chatgpt": "chat.openai.com",
+    "claude": "claude.ai",
+    "reddit": "reddit.com",
+    "twitter": "x.com",
+    "x": "x.com",
+    "instagram": "instagram.com",
+    "linkedin": "linkedin.com",
+    "netflix": "netflix.com",
+    "amazon": "amazon.com",
+    "wikipedia": "wikipedia.org",
+    "stackoverflow": "stackoverflow.com",
+    "leetcode": "leetcode.com",
+    "whatsapp": "web.whatsapp.com",
+    "spotify": "open.spotify.com",
+    "drive": "drive.google.com",
+    "maps": "maps.google.com",
+    "translate": "translate.google.com",
+    "colab": "colab.research.google.com",
 }
 
 def open_website(name):
