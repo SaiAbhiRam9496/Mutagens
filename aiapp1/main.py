@@ -1,6 +1,6 @@
 # main.py
 # Entry point: reads input, parses intent, routes to the right handler
-
+from hands import focus_window
 from parser import parse_command
 from websites import open_website, search_website, KNOWN_SITES
 from apps import open_app, close_app
@@ -17,6 +17,9 @@ def route_command(intent, target, extra):
 
     elif intent == "close":
         close_app(target)
+
+    elif intent == "focus":
+        focus_window(target)
 
     else:
         print("Sorry, I don't understand that yet.")

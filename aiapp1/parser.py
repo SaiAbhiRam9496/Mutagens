@@ -24,4 +24,9 @@ def parse_command(text):
         target = target.replace(" app", "")
         return ("close", target.strip(), None)
 
+    # "focus X" or "switch to X"
+    if text.startswith("focus") or text.startswith("switch to"):
+        target = text.replace("switch to ", "").replace("focus on ", "").replace("focus ", "")
+        return ("focus", target.strip(), None)
+
     return ("unknown", text, None)
