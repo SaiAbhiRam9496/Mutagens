@@ -1,15 +1,18 @@
-# Mutagens — AI Experiments Repo
+# Mutagens — Experiments Repo
 
-A collection of AI/agent projects, built incrementally, from scratch.
+A collection of AI/agent projects, built incrementally from scratch.
 
 ## Projects
 
-### aiapp1 — Jarvis-Lite
-A local, offline-first personal assistant. No cloud APIs, no external "brain" —
-built layer by layer starting from simple rule-based command parsing,
-working up to voice control and local model-based intent understanding.
+### aiapp1 — Mutagen
+A local, offline-first personal assistant controlled by text or voice.
+No cloud AI APIs — rule-based command parsing, direct OS/window control,
+and local speech-to-text/text-to-speech.
 
-See [aiapp1/README.md](aiapp1/README.md) for detailed progress log.
+Current capabilities: open/search websites, launch/close apps, switch windows,
+send keyboard shortcuts, take screenshots, voice input/output.
+
+See [aiapp1/README.md](aiapp1/README.md) for full progress log and setup.
 
 ### aiapp2 — (planned)
 TBD

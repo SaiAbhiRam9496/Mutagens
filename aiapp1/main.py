@@ -61,8 +61,8 @@ def main():
         command = get_command()
         if not command:
             continue
-        if command.lower() == "quit":
-            break
+        if command.lower() in ["quit", "exit", "bye", "goodbye", "stop"]:
+            breaks
         intent, target, extra = parse_command(command)
         route_command(intent, target, extra)
 

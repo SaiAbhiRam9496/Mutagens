@@ -34,18 +34,30 @@ Voice/Text Input → Intent Parser → Action Executor → Feedback (voice/text)
   - `search python tutorials` ✅
   - Unknown commands correctly fall through to "Sorry, I don't understand that yet." ✅
 
-### Phase 3 — Hands (mouse/keyboard control) (NEXT)
-- [ ] `pyautogui` for UI interaction beyond simple launches
-- [ ] `pygetwindow` for window management
-- [ ] Expand `KNOWN_APPS` / `KNOWN_SITES` dictionaries
+### Phase 3 — Hands (mouse/keyboard/window control) ✅ DONE
+- `hands.py` added:
+  - `focus_window()` — switches to an open window by matching title substring
+  - `press_hotkey()` — simulates key combos (alt+tab, ctrl+c, etc.)
+  - `take_screenshot()` — saves timestamped screenshots to `screenshots/`
+- New parser intents: `focus`, `hotkey`, `screenshot`
+- Bare hotkey phrases supported ("alt tab", "control c", "windows d") via a lookup table, no need to say "press" explicitly
+- Known limitation: `pygetwindow.activate()` occasionally raises a false-positive Windows error even on success — wrapped in try/except to prevent crashes
 
-### Phase 4 — Voice
-- [ ] Speech-to-text input (`speech_recognition`)
-- [ ] Text-to-speech output (`pyttsx3`)
+### Phase 4 — Voice ✅ DONE
+- `voice.py` added:
+  - `listen()` — mic input via `speech_recognition` (Google Web Speech API, needs internet)
+  - `speak()` — offline text-to-speech via `pyttsx3`
+- `main.py` now supports a voice/text toggle:
+  - Say/type `"voice mode on"` to switch to mic input
+  - Say/type `"voice mode off"` to return to typed input
+- Expanded quit phrases: `quit`, `exit`, `bye`, `goodbye`, `stop`
+- Tested and working: open/search/focus/hotkey commands all functional via voice
+- Known limitation: no wake word yet — voice mode listens continuously in a loop once turned on
 
-### Phase 5 — Smart fallback (local model)
+### Phase 5 — Smart fallback (local model) (NEXT)
 - [ ] Local model via `transformers` for intent classification only
 - [ ] Kicks in only when rule-based parser fails
+- [ ] Consider wake-word detection for hands-free activation
 
 ## Project Structure
 
@@ -61,6 +73,12 @@ Voice/Text Input → Intent Parser → Action Executor → Feedback (voice/text)
 - python -m venv venv
 - venv\Scripts\Activate.ps1
 - python main.py
+
+## Requirements
+See `requirements.txt`. Install with:
+```
+pip install -r requirements.txt
+```
 
 ## Notes
 - venv is gitignored, recreate it locally with the command above
