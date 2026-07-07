@@ -1,6 +1,8 @@
 # main.py
 # Entry point: reads input, parses intent, routes to the right handler
 from hands import focus_window
+from hands import focus_window, press_hotkey
+from hands import focus_window, press_hotkey, take_screenshot
 from parser import parse_command
 from websites import open_website, search_website, KNOWN_SITES
 from apps import open_app, close_app
@@ -20,6 +22,13 @@ def route_command(intent, target, extra):
 
     elif intent == "focus":
         focus_window(target)
+
+    elif intent == "hotkey":
+        press_hotkey(*target)
+
+    elif intent == "screenshot":
+        path = take_screenshot()
+        print(f"Screenshot saved to {path}")
 
     else:
         print("Sorry, I don't understand that yet.")

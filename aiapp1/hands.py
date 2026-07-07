@@ -1,6 +1,6 @@
 # hands.py
 # Direct UI control: mouse, keyboard, window management
-
+import os
 import pyautogui
 import pygetwindow as gw
 import time
@@ -16,7 +16,15 @@ def type_text(text, interval=0.03):
 def press_key(key):
     pyautogui.press(key)
 
-def take_screenshot(save_path="screenshot.png"):
+from datetime import datetime
+
+SCREENSHOT_DIR = "screenshots"
+
+def take_screenshot():
+    os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"screenshot_{timestamp}.png"
+    save_path = os.path.join(SCREENSHOT_DIR, filename)
     img = pyautogui.screenshot()
     img.save(save_path)
     return save_path
@@ -36,3 +44,6 @@ def focus_window(title_substring):
 def list_open_windows():
     titles = [t for t in gw.getAllTitles() if t.strip()]
     return titles
+
+def press_hotkey(*keys):
+    pyautogui.hotkey(*keys)

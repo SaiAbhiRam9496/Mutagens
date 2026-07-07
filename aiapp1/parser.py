@@ -29,4 +29,13 @@ def parse_command(text):
         target = text.replace("switch to ", "").replace("focus on ", "").replace("focus ", "")
         return ("focus", target.strip(), None)
 
+    # "press ctrl c", "press alt tab", etc.
+    if text.startswith("press"):
+        keys = text.replace("press ", "").split()
+        return ("hotkey", keys, None)
+
+    # "screenshot" or "take a screenshot"
+    if "screenshot" in text:
+        return ("screenshot", None, None)
+
     return ("unknown", text, None)
