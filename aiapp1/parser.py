@@ -1,11 +1,11 @@
 # parser.py
 # Rule-based intent parser: turns raw text into (intent, target, extra)
 from difflib import get_close_matches
-
+from classifier import predict_intent
 KNOWN_VERBS = ["open", "close", "focus", "search", "press", "screenshot"]
 
 def fuzzy_match_verb(word):
-    matches = get_close_matches(word, KNOWN_VERBS, n=1, cutoff=0.7)
+    matches = get_close_matches(word, KNOWN_VERBS, n=1, cutoff=0.5)
     return matches[0] if matches else None
 
 def parse_command(text):
@@ -88,5 +88,32 @@ def parse_command(text):
                 return ("hotkey", remainder.split(), None)
             elif guessed_verb == "screenshot":
                 return ("screenshot", None, None)
+
+    # --- ML CLASSIFIER FALLBACK ---
+    FILLER_PHRASES = ["pull up ", "show me ", "bring up ", "fire up ", "get me on ",
+                       "go to ", "switch to ", "bring ", "to front", "look up ",
+                       "find ", "search for ", "capture my screen", "take a picture of my screen",
+                       "grab a "]
+
+    predicted = predict_intent(text)
+    if predicted:
+        print(f"(Classifier guessed intent: {predicted})")
+        cleaned = text
+        for phrase in FILLER_PHRASES:
+            cleaned = cleaned.replace(phrase, "")
+        cleaned = cleaned.strip()
+
+        if predicted == "open":
+            return ("open", cleaned, None)
+        elif predicted == "close":
+            return ("close", cleaned, None)
+        elif predicted == "focus":
+            return ("focus", cleaned, None)
+        elif predicted == "search":
+            return ("search", cleaned, "google")
+        elif predicted == "hotkey":
+            return ("hotkey", cleaned.split(), None)
+        elif predicted == "screenshot":
+            return ("screenshot", None, None)
 
     return ("unknown", text, None)

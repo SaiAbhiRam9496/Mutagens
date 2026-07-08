@@ -26,18 +26,29 @@ KNOWN_APPS = {
 
 def open_app(name):
     name = name.strip().lower()
+    if not name or len(name) < 2:
+        print("That didn't sound like a valid app name — try again.")
+        return
     if name not in KNOWN_APPS:
-        matches = get_close_matches(name, KNOWN_APPS.keys(), n=1, cutoff=0.6)
+        matches = get_close_matches(name, KNOWN_APPS.keys(), n=1, cutoff=0.5)
         if matches:
             print(f"(Interpreting '{name}' as '{matches[0]}')")
             name = matches[0]
+        else:
+            print(f"'{name}' isn't a known app. Add it to KNOWN_APPS in apps.py if you want it supported.")
+            return
     command = KNOWN_APPS.get(name, name)
     os.system(f"start {command}")
     print(f"Opening {name}")
     
 def close_app(name):
-    """Closes an app by killing its process (best-effort)."""
     name = name.strip().lower()
+    if not name or len(name) < 2:
+        print("That didn't sound like a valid app name to close.")
+        return
     process_name = KNOWN_APPS.get(name, name)
-    os.system(f"taskkill /IM {process_name}.exe /F")
-    print(f"Closing {name}")
+    result = os.system(f"taskkill /IM {process_name}.exe /F")
+    if result != 0:
+        print(f"Couldn't close '{name}' — it may not be running.")
+    else:
+        print(f"Closed {name}")

@@ -49,4 +49,7 @@ def list_open_windows():
     return titles
 
 def press_hotkey(*keys):
-    pyautogui.hotkey(*keys)
+    try:
+        pyautogui.hotkey(*keys)
+    except pyautogui.FailSafeException:
+        print("Hotkey cancelled — mouse was in a screen corner (fail-safe triggered).")

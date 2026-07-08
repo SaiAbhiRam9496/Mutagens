@@ -1,6 +1,6 @@
 # main.py
 # Entry point: reads input (text or voice), parses intent, routes to the right handler
-
+from logger import log_command
 from parser import parse_command
 from websites import open_website, search_website, KNOWN_SITES
 from apps import open_app, close_app
@@ -47,11 +47,21 @@ def route_command(intent, target, extra):
     else:
         print("Sorry, I don't understand that yet.")
 
+WAKE_WORD = "mutagen"
+
 def get_command():
     global VOICE_MODE
     if VOICE_MODE:
         text = listen()
-        return text if text else ""
+        if not text:
+            return ""
+        text_lower = text.lower()
+        if WAKE_WORD in text_lower:
+            command = text_lower.replace(WAKE_WORD, "").strip()
+            return command if command else ""
+        else:
+            print(f"(Ignored — no wake word '{WAKE_WORD}' detected)")
+            return ""
     else:
         return input("You: ").strip()
 
@@ -64,6 +74,7 @@ def main():
         if command.lower() in ["quit", "exit", "bye", "goodbye", "stop"]:
             break
         intent, target, extra = parse_command(command)
+        log_command(command, intent, target)
         route_command(intent, target, extra)
 
 if __name__ == "__main__":

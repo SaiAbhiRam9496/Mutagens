@@ -1,0 +1,91 @@
+# training_data.py
+# Example phrases mapped to intents, used to train the fallback classifier
+# Add your own phrasing below to keep improving accuracy over time.
+
+TRAINING_DATA = [
+    # open
+    ("open chrome", "open"),
+    ("launch chrome", "open"),
+    ("start notepad", "open"),
+    ("pull up youtube", "open"),
+    ("get me on google", "open"),
+    ("fire up spotify", "open"),
+    ("bring up excel", "open"),
+    ("open vs code", "open"),
+    ("launch visual studio code", "open"),
+    ("start chrome browser", "open"),
+    ("open the calculator", "open"),
+    ("run notepad", "open"),
+    ("open my email", "open"),
+    ("open github", "open"),
+    ("can you open reddit", "open"),
+    ("open spotify please", "open"),
+    ("i want to open notepad", "open"),
+    ("start up excel", "open"),
+    ("open word document", "open"),
+    ("launch paint", "open"),
+
+    # close
+    ("close notepad", "close"),
+    ("shut down chrome", "close"),
+    ("kill spotify", "close"),
+    ("quit notepad", "close"),
+    ("exit excel", "close"),
+    ("shutdown notepad", "close"),
+    ("close this window", "close"),
+    ("close chrome please", "close"),
+    ("terminate notepad", "close"),
+    ("end task notepad", "close"),
+    ("close down spotify", "close"),
+    ("get rid of this window", "close"),
+    ("close vs code", "close"),
+    ("i want to close notepad", "close"),
+
+    # focus
+    ("switch to chrome", "focus"),
+    ("go to notepad", "focus"),
+    ("bring chrome to front", "focus"),
+    ("show me vs code", "focus"),
+    ("switch to vs code", "focus"),
+    ("focus on chrome", "focus"),
+    ("bring up my browser window", "focus"),
+    ("go back to notepad", "focus"),
+    ("show me chrome", "focus"),
+    ("switch windows to chrome", "focus"),
+    ("i want to see vs code", "focus"),
+    ("bring notepad forward", "focus"),
+
+    # search
+    ("search for cats", "search"),
+    ("look up python tutorials", "search"),
+    ("find recipes online", "search"),
+    ("google how to cook rice", "search"),
+    ("search python tutorials", "search"),
+    ("look up the weather", "search"),
+    ("find me some music", "search"),
+    ("search for news", "search"),
+    ("google search for laptops", "search"),
+    ("can you look up cats", "search"),
+    ("find information about ai", "search"),
+
+    # hotkey
+    ("copy this", "hotkey"),
+    ("paste it", "hotkey"),
+    ("undo that", "hotkey"),
+    ("switch tabs", "hotkey"),
+    ("copy that text", "hotkey"),
+    ("paste this here", "hotkey"),
+    ("undo my last action", "hotkey"),
+    ("redo that", "hotkey"),
+    ("switch to next tab", "hotkey"),
+    ("select all", "hotkey"),
+
+    # screenshot
+    ("capture my screen", "screenshot"),
+    ("take a picture of my screen", "screenshot"),
+    ("grab a screenshot", "screenshot"),
+    ("take a screenshot please", "screenshot"),
+    ("capture the screen", "screenshot"),
+    ("snap a picture of this", "screenshot"),
+    ("screenshot this", "screenshot"),
+]
